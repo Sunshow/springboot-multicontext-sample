@@ -1,0 +1,5 @@
+rootProject.name = 'springboot-multicontext-sample'
+include 'container'
+include 'sub1'
+include 'sub2'
+
