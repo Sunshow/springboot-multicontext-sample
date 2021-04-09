@@ -7,13 +7,19 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class ContainerSpringApplication extends SpringApplication {
 
+    public ContainerSpringApplication(Class<?>... classes) {
+        super(classes);
+    }
+
     public static void main(String[] args) {
-        run(ContainerSpringApplication.class, args);
+        new ContainerSpringApplication(ContainerSpringApplication.class).run(args);
     }
 
     @Override
     protected ConfigurableApplicationContext createApplicationContext() {
-        return super.createApplicationContext();
+        ConfigurableApplicationContext parent = super.createApplicationContext();
+
+        return parent;
     }
 
 }
