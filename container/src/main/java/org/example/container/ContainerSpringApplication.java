@@ -1,25 +1,20 @@
 package org.example.container;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
+import org.example.container.config.RootConfig;
+import org.example.sub1.Sub1Application;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 
-@SpringBootApplication
-public class ContainerSpringApplication extends SpringApplication {
-
-    public ContainerSpringApplication(Class<?>... classes) {
-        super(classes);
-    }
+public class ContainerSpringApplication {
 
     public static void main(String[] args) {
-        new ContainerSpringApplication(ContainerSpringApplication.class).run(args);
-    }
+        SpringApplicationBuilder rootBuilder = new SpringApplicationBuilder(RootConfig.class);
+        //.parent(ContainerSpringApplication.class);
 
-    @Override
-    protected ConfigurableApplicationContext createApplicationContext() {
-        ConfigurableApplicationContext parent = super.createApplicationContext();
+        //rootBuilder.run(args);
 
-        return parent;
+        SpringApplicationBuilder sub1Builder = rootBuilder.child(Sub1Application.class);
+
+        sub1Builder.run(args);
     }
 
 }
